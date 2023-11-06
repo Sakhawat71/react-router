@@ -3,21 +3,32 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import Home from './components/Home/Home'
+import About from './components/About/About'
+import Contact from './components/Contact/Contact'
+import Users from './components/Users/Users'
+
 
 
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home></Home>
-    },
-    {
-        path: '/about',
-        element: <h3>About</h3>
-    },
-    {
-        path: '/shuvo',
-        element: <h1>S2-Arifin</h1>
+        element: <Home></Home>,
+        children:[
+            {
+                path: '/about',
+                element: <About></About>
+            },
+            {
+                path: '/contact',
+                element: <Contact></Contact>
+            },
+            {
+                path: '/users',
+                loader: () => fetch('https://jsonplaceholder.typicode.com/users'),
+                element: <Users></Users>
+            }
+        ]
     }
 ])
 
